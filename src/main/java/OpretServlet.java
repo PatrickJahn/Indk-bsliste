@@ -8,10 +8,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(name = "LoginServlet", urlPatterns = "/LoginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "OpretServlet", urlPatterns = "/OpretServlet")
+public class OpretServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         ServletContext servletContext = getServletContext();
 
         if (servletContext.getAttribute("brugerMap") == null) {
@@ -19,9 +18,7 @@ public class LoginServlet extends HttpServlet {
             servletContext.setAttribute("brugerMap", brugerMap);
         }
 
-
         checkCredentials(servletContext, request, response);
-
 
     }
 
@@ -35,21 +32,17 @@ public class LoginServlet extends HttpServlet {
 
         String navn = request.getParameter("navn");
         String pass = request.getParameter("password");
+       Map<String, String> brugerMap = (Map<String, String>) servletContext.getAttribute("brugerMap");
 
-
-        if (!((Map<String, String>) servletContext.getAttribute("brugerMap")).containsKey(navn)) {
-            request.setAttribute("besked", "Bruger findes ikke");
-            request.getRequestDispatcher("index.jsp").forward(request,response);
-        }
-
-        if (((Map<String, String>) servletContext.getAttribute("brugerMap")).get(navn).equalsIgnoreCase(pass)) {
-
+        if (!brugerMap.containsKey(navn)) {
+          brugerMap.put(navn, pass);
             request.getRequestDispatcher("WEB-INF/Huskeliste.jsp").forward(request,response);
-
         } else {
-            request.setAttribute("besked", "Forkert kode");
-            request.getRequestDispatcher("index.jsp").forward(request,response);
+            request.setAttribute("besked", "Bruger findes allerede..");
+            request.getRequestDispatcher("OpretBruger.jsp").forward(request,response);
 
         }
+
+
     }
 }
