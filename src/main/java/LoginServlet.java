@@ -16,6 +16,7 @@ public class LoginServlet extends HttpServlet {
 
         if (servletContext.getAttribute("brugerMap") == null) {
             Map<String, String> brugerMap = new HashMap<>();
+            brugerMap.put("Admin","1234");
             servletContext.setAttribute("brugerMap", brugerMap);
         }
 
@@ -35,14 +36,18 @@ public class LoginServlet extends HttpServlet {
 
         String navn = request.getParameter("navn");
         String pass = request.getParameter("password");
+        Map<String, String> brugerMap = (Map<String, String>) servletContext.getAttribute("brugerMap");
 
-
-        if (!((Map<String, String>) servletContext.getAttribute("brugerMap")).containsKey(navn)) {
+        if (!brugerMap.containsKey(navn)) {
             request.setAttribute("besked", "Bruger findes ikke");
             request.getRequestDispatcher("index.jsp").forward(request,response);
         }
 
-        if (((Map<String, String>) servletContext.getAttribute("brugerMap")).get(navn).equalsIgnoreCase(pass)) {
+        if (brugerMap.get(navn).equalsIgnoreCase(pass)) {
+
+            if (navn.equalsIgnoreCase("Admin")) {
+                request.getRequestDispatcher("WEB-INF/Admin.jsp").forward(request,response);
+            }
 
             request.getRequestDispatcher("WEB-INF/Huskeliste.jsp").forward(request,response);
 

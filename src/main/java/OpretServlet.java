@@ -15,6 +15,7 @@ public class OpretServlet extends HttpServlet {
 
         if (servletContext.getAttribute("brugerMap") == null) {
             Map<String, String> brugerMap = new HashMap<>();
+            brugerMap.put("Admin","1234");
             servletContext.setAttribute("brugerMap", brugerMap);
         }
 
