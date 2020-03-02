@@ -13,5 +13,15 @@
 </head>
 <body>
 <h1>Velkommen til indkøbslisten</h1>
+
+
+<form action="LoginServlet" method="post">
+    <label for="fname">First name:</label><br>
+    <input type="text" id="fname" name="navn"><br>
+    <label for="pass">Password:</label><br>
+    <input type="password" id="pass" name="password" ><br><br>
+    <input type="submit" value="Login">
+</form>
+
 </body>
 </html>
