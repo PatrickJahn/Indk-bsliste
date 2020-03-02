@@ -12,7 +12,7 @@
     <title>Indkøbslisten</title>
 </head>
 <body>
-<h1>Velkommen til indkøbslisten</h1>
+<h1>Velkommen til webshoppen ${sessionScope.brugerNavn}</h1>
 
 
 <form action="LoginServlet" method="post">
