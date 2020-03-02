@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Indkøbslisten</title>
 </head>
 <body>
 <h1>Velkommen til indkøbslisten</h1>
@@ -19,7 +19,9 @@
     <label for="fname">First name:</label><br>
     <input type="text" id="fname" name="navn"><br>
     <label for="pass">Password:</label><br>
-    <input type="password" id="pass" name="password" ><br><br>
+    <input type="password" id="pass" name="password" >
+    <p style="color: red">${requestScope.besked}</p>
+
     <input type="submit" value="Login">
 </form>
 
